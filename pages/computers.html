@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أجهزة الكمبيوتر - متجر تكنو</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الهيدر */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .user-actions a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav {
+            background-color: var(--secondary);
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* زر القائمة للموبايل */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* قسم الفلترة والبحث */
+        .page-header {
+            background-color: var(--light);
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .category-tab {
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-tab.active,
+        .category-tab:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .filter-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .price-range {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .price-input {
+            width: 100px;
+            padding: 8px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+        }
+        
+        .filter-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* المنتجات */
+        .products-section {
+            padding: 20px 0 60px;
+        }
+        
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .products-count {
+            color: var(--gray);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f8f8;
+        }
+        
+        .product-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            height: 48px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-old-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .product-specs {
+            list-style: none;
+            margin-bottom: 15px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        .product-specs li {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .product-specs li i {
+            margin-left: 5px;
+            color: var(--primary);
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+        
+        .favorite-btn {
+            background-color: transparent;
+            border: 1px solid var(--gray);
+            color: var(--gray);
+            padding: 8px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .favorite-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        /* قسم المكونات */
+        .components-section {
+            background-color: var(--light);
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 10px auto;
+        }
+        
+        .components-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .component-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .component-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .component-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .component-card h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .component-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* الترقيم */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 5px;
+        }
+        
+        .pagination a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .pagination a.active,
+        .pagination a:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* التجاوبية */
+        @media (max-width: 992px) {
+            .filter-row {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+            
+            .components-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                order: 3;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 20px;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                left: 15px;
+                top: 20px;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .category-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 15px;
+            }
+            
+            .product-img {
+                height: 150px;
+            }
+            
+            .product-info h3 {
+                font-size: 1rem;
+                height: auto;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .filter-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .components-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXpjYx0uM617EfReX5Ee7ndDETaUnJunbCqA&s" alt="شعار متجر تكنو">
+                    <h1>عمار موبايل</h1>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="ابحث عن جهاز الكمبيوتر الذي تريده...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="user-actions">
+                  <a href="/pages/login.html"><i class="fas fa-user"></i> حسابي</a>
+                    <a href="/pages/cart.html"><i class="fas fa-shopping-cart"></i> السلة</a>
+                    <a href="/pages/favorites.html"><i class="fas fa-heart"></i> المفضلة</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav id="mainNav">
+            <div class="container">
+                <ul>
+                   <li><a href="/index.html">الرئيسية</a></li>
+                    <li><a href="phones.html">الهواتف</a></li>
+                    <li><a href="laptops.html">اللابتوبات</a></li>
+                    <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                    <li><a href="accessories.html">الإكسسوارات</a></li>
+                    <li><a href="covers.html">الكفرات</a></li>
+                    <li><a href="offers.html">العروض</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- قسم أجهزة الكمبيوتر -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">أجهزة الكمبيوتر</h1>
+            <p class="page-subtitle">اكتشف مجموعتنا الواسعة من أجهزة الكمبيوتر المكتبية والمحمولة والمكونات بمواصفات وأسعار تنافسية</p>
+            
+            <div class="category-tabs">
+                <div class="category-tab active">جميع الأجهزة</div>
+                <div class="category-tab">أجهزة الجيمنج</div>
+                <div class="category-tab">أجهزة العمل</div>
+                <div class="category-tab">أجهزة المونتاج</div>
+                <div class="category-tab">مجمعة مسبقاً</div>
+                <div class="category-tab">مكونات</div>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="brand">الشركة المصنعة</label>
+                        <select id="brand" class="filter-select">
+                            <option value="">جميع الشركات</option>
+                            <option value="dell">ديل</option>
+                            <option value="hp">إتش بي</option>
+                            <option value="lenovo">لينوفو</option>
+                            <option value="asus">أسوس</option>
+                            <option value="msi">إم إس آي</option>
+                            <option value="apple">آبل</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="price">نطاق السعر</label>
+                        <div class="price-range">
+                            <input type="number" id="minPrice" class="price-input" placeholder="الحد الأدنى">
+                            <span>إلى</span>
+                            <input type="number" id="maxPrice" class="price-input" placeholder="الحد الأقصى">
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="cpu">المعالج</label>
+                        <select id="cpu" class="filter-select">
+                            <option value="">جميع المعالجات</option>
+                            <option value="i3">Intel Core i3</option>
+                            <option value="i5">Intel Core i5</option>
+                            <option value="i7">Intel Core i7</option>
+                            <option value="i9">Intel Core i9</option>
+                            <option value="ryzen3">AMD Ryzen 3</option>
+                            <option value="ryzen5">AMD Ryzen 5</option>
+                            <option value="ryzen7">AMD Ryzen 7</option>
+                            <option value="ryzen9">AMD Ryzen 9</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="ram">الذاكرة العشوائية</label>
+                        <select id="ram" class="filter-select">
+                            <option value="">جميع السعات</option>
+                            <option value="8">8 جيجابايت</option>
+                            <option value="16">16 جيجابايت</option>
+                            <option value="32">32 جيجابايت</option>
+                            <option value="64">64 جيجابايت</option>
+                            <option value="128">128 جيجابايت</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="storage">التخزين</label>
+                        <select id="storage" class="filter-select">
+                            <option value="">جميع أنواع التخزين</option>
+                            <option value="hdd">HDD</option>
+                            <option value="ssd">SSD</option>
+                            <option value="nvme">NVMe SSD</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="gpu">كرت الشاشة</label>
+                        <select id="gpu" class="filter-select">
+                            <option value="">جميع كروت الشاشة</option>
+                            <option value="integrated">مدمج</option>
+                            <option value="gtx1650">GTX 1650</option>
+                            <option value="rtx3050">RTX 3050</option>
+                            <option value="rtx3060">RTX 3060</option>
+                            <option value="rtx3070">RTX 3070</option>
+                            <option value="rtx3080">RTX 3080</option>
+                            <option value="rtx3090">RTX 3090</option>
+                            <option value="rx6600">RX 6600</option>
+                            <option value="rx6700">RX 6700</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="btn btn-outline">إعادة تعيين</button>
+                    <button class="btn">تطبيق الفلترة</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المنتجات -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-header">
+                <h2>أجهزة الكمبيوتر <span class="products-count">(18 منتج)</span></h2>
+                
+                <div class="sort-options">
+                    <label for="sort">ترتيب حسب:</label>
+                    <select id="sort" class="filter-select">
+                        <option value="popular">الأكثر شيوعاً</option>
+                        <option value="newest">الأحدث</option>
+                        <option value="price-low">السعر: من الأقل للأعلى</option>
+                        <option value="price-high">السعر: من الأعلى للأقل</option>
+                        <option value="performance">الأعلى أداءً</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="products-grid">
+                <!-- جهاز 1 -->
+                <div class="product-card">
+                    <div class="product-badge">الأكثر مبيعاً</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="كمبيوتر ديل للألعاب">
+                    </div>
+                    <div class="product-info">
+                        <h3>ديل ألينوير للجيمنج - إصدار خاص</h3>
+                        <div class="product-price">
+                            <span class="product-old-price">5,999 دينار</span>
+                            5,299 دينار
+                        </div>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-microchip"></i> Intel Core i7-12700K</li>
+                            <li><i class="fas fa-memory"></i> 32GB DDR5 RAM</li>
+                            <li><i class="fas fa-hdd"></i> 1TB NVMe SSD + 2TB HDD</li>
+                            <li><i class="fas fa-desktop"></i> RTX 3070 8GB</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- جهاز 2 -->
+                <div class="product-card">
+                    <div class="product-badge">عرض خاص</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="كمبيوتر أسوس للألعاب">
+                    </div>
+                    <div class="product-info">
+                        <h3>أسوس روغ للجيمنج - أداء فائق</h3>
+                        <div class="product-price">
+                            <span class="product-old-price">7,499 دينار</span>
+                            6,799 دينار
+                        </div>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-microchip"></i> AMD Ryzen 7 5800X</li>
+                            <li><i class="fas fa-memory"></i> 16GB DDR4 RAM</li>
+                            <li><i class="fas fa-hdd"></i> 1TB NVMe SSD</li>
+                            <li><i class="fas fa-desktop"></i> RTX 3080 10GB</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- جهاز 3 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="كمبيوتر إتش بي للعمل">
+                    </div>
+                    <div class="product-info">
+                        <h3>إتش بي بافيليون للعمل والمونتاج</h3>
+                        <div class="product-price">3,899 دينار</div>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-microchip"></i> Intel Core i5-12400</li>
+                            <li><i class="fas fa-memory"></i> 16GB DDR4 RAM</li>
+                            <li><i class="fas fa-hdd"></i> 512GB SSD + 1TB HDD</li>
+                            <li><i class="fas fa-desktop"></i> GTX 1660 Super 6GB</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- جهاز 4 -->
+                <div class="product-card">
+                    <div class="product-badge">جديد</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="كمبيوتر إم إس آي">
+                    </div>
+                    <div class="product-info">
+                        <h3>إم إس آي للجيمنج - إصدار النخبة</h3>
+                        <div class="product-price">8,499 دينار</div>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-microchip"></i> Intel Core i9-12900K</li>
+                            <li><i class="fas fa-memory"></i> 64GB DDR5 RAM</li>
+                            <li><i class="fas fa-hdd"></i> 2TB NVMe SSD</li>
+                            <li><i class="fas fa-desktop"></i> RTX 3090 24GB</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- جهاز 5 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="كمبيوتر لينوفو">
+                    </div>
+                    <div class="product-info">
+                        <h3>لينوفو ليجيون - للألعاب والمونتاج</h3>
+                        <div class="product-price">4,299 دينار</div>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-microchip"></i> AMD Ryzen 5 5600X</li>
+                            <li><i class="fas fa-memory"></i> 16GB DDR4 RAM</li>
+                            <li><i class="fas fa-hdd"></i> 1TB NVMe SSD</li>
+                            <li><i class="fas fa-desktop"></i> RTX 3060 12GB</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- جهاز 6 -->
+                <div class="product-card">
+                    <div class="product-badge">وفر 12%</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1142&q=80" alt="كمبيوتر آبل">
+                    </div>
+                    <div class="product-info">
+                        <h3>آبل ماك ستوديو - للمحترفين</h3>
+                        <div class="product-price">
+                            <span class="product-old-price">9,999 دينار</span>
+                            8,799 دينار
+                        </div>
+                        <ul class="product-specs">
+                            <li><i class="fas fa-microchip"></i> Apple M1 Max</li>
+                            <li><i class="fas fa-memory"></i> 32GB Unified Memory</li>
+                            <li><i class="fas fa-hdd"></i> 1TB SSD</li>
+                            <li><i class="fas fa-desktop"></i> 32-core GPU</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الترقيم -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fas fa-chevron-left"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المكونات -->
+    <section class="components-section">
+        <div class="container">
+            <h2 class="section-title">مكونات الكمبيوتر</h2>
+            <p class="page-subtitle">اختر من بين مجموعة واسعة من مكونات الكمبيوتر لبناء جهازك المثالي</p>
+            
+            <div class="components-grid">
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-microchip"></i>
+                    </div>
+                    <h3>المعالجات</h3>
+                    <p>أحدث معالجات من إنتل وAMD</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>كروت الشاشة</h3>
+                    <p>أقوى كروت الشاشة للألعاب والمونتاج</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-memory"></i>
+                    </div>
+                    <h3>الذاكرة</h3>
+                    <p>ذاكرة عشوائية بسرعات مختلفة</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-hdd"></i>
+                    </div>
+                    <h3>التخزين</h3>
+                    <p>أقراص SSD وHDD بسرعات وسعات مختلفة</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>اللوحات الأم</h3>
+                    <p>لوحات أم متوافقة مع أحدث المعالجات</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>مزودات الطاقة</h3>
+                    <p>مزودات طاقة بكفاءات مختلفة</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-archive"></i>
+                    </div>
+                    <h3>صناديق الحاسب</h3>
+                    <p>صناديق بتصاميم وأحجام مختلفة</p>
+                </div>
+                
+                <div class="component-card">
+                    <div class="component-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <h3>أنظمة التبريد</h3>
+                    <p>مبردات هواء وسوائل للمعالجات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن المتجر</h3>
+                    <p>متجر تكنو يوفر أحدث الأجهزة الإلكترونية من هواتف، لابتوبات، أجهزة كمبيوتر وإكسسوارات بجودة عالية وأسعار منافسة.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                        <li><a href="offers.html">العروض</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li><a href="phones.html">الهواتف</a></li>
+                        <li><a href="laptops.html">اللابتوبات</a></li>
+                        <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                        <li><a href="accessories.html">الإكسسوارات</a></li>
+                        <li><a href="covers.html">الكفرات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات الاتصال</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> الرياض، المملكة العربية السعودية</li>
+                        <li><i class="fas fa-phone"></i> +966 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@technostore.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 متجر تكنو</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            // زر القائمة للموبايل
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // علامات التبويب
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // إضافة تأثير عند الضغط على أزرار إضافة إلى السلة
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('h3').textContent;
+                    alert(`تم إضافة ${productName} إلى سلة التسوق`);
+                });
+            });
+            
+            // إضافة تأثير عند الضغط على أزرار المفضلة
+            const favoriteButtons = document.querySelectorAll('.favorite-btn');
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        this.style.color = 'var(--accent)';
+                        this.style.borderColor = 'var(--accent)';
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        this.style.color = 'var(--gray)';
+                        this.style.borderColor = 'var(--gray)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

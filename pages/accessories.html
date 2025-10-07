@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإكسسوارات - متجر تكنو</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الهيدر */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .user-actions a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav {
+            background-color: var(--secondary);
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* الهيرو */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: #c0392b;
+        }
+        
+        /* الأقسام */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 10px auto;
+        }
+        
+        /* تصنيفات الإكسسوارات */
+        .categories {
+            background-color: var(--light);
+        }
+        
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .category-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-img {
+            height: 150px;
+            overflow: hidden;
+        }
+        
+        .category-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .category-card:hover .category-img img {
+            transform: scale(1.05);
+        }
+        
+        .category-info {
+            padding: 15px;
+        }
+        
+        .category-info h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+        
+        /* تصفية المنتجات */
+        .filters {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group h3 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+            font-size: 1.1rem;
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-option {
+            background-color: var(--light);
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-option:hover, .filter-option.active {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .product-info p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            min-height: 40px;
+        }
+        
+        .product-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .old-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+        
+        .product-rating {
+            color: #f1c40f;
+            margin-bottom: 10px;
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+        
+        /* قسم العروض */
+        .offers {
+            background-color: var(--light);
+        }
+        
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .offer-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .offer-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        
+        .offer-img {
+            height: 200px;
+        }
+        
+        .offer-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .offer-info {
+            padding: 15px;
+        }
+        
+        .offer-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .offer-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* التجاوبية */
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .filter-options {
+                flex-direction: column;
+            }
+            
+            .categories-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXpjYx0uM617EfReX5Ee7ndDETaUnJunbCqA&s" alt="شعار متجر تكنو">
+                    <h1>عمار موبايل</h1>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="ابحث عن الإكسسوارات التي تريدها...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="user-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> حسابي</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> السلة</a>
+                    <a href="favorites.html"><i class="fas fa-heart"></i> المفضلة</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav>
+            <div class="container">
+                <ul>
+                    <li><a href="/index.html">الرئيسية</a></li>
+                    <li><a href="phones.html">الهواتف</a></li>
+                    <li><a href="laptops.html">اللابتوبات</a></li>
+                    <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                    <li><a href="accessories.html">الإكسسوارات</a></li>
+                    <li><a href="covers.html">الكفرات</a></li>
+                    <li><a href="offers.html">العروض</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- قسم الهيرو -->
+    <section class="hero">
+        <div class="container">
+            <h2>إكسسوارات تكنولوجية بجودة عالية</h2>
+            <p>اكتشف مجموعتنا الواسعة من الإكسسوارات التكنولوجية المناسبة لهواتفكم، لابتوباتكم وأجهزتكم الأخرى. جودة عالية وأسعار منافسة.</p>
+            <a href="#products" class="btn">استعرض الإكسسوارات</a>
+        </div>
+    </section>
+
+    <!-- قسم التصنيفات -->
+    <section class="categories">
+        <div class="container">
+            <h2 class="section-title">تصنيفات الإكسسوارات</h2>
+            <div class="categories-grid">
+                <div class="category-card" data-category="cases">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="كفرات الهواتف">
+                    </div>
+                    <div class="category-info">
+                        <h3>كفرات الهواتف</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="chargers">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1609592810793-abeb6c64b5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="شواحن وكابلات">
+                    </div>
+                    <div class="category-info">
+                        <h3>شواحن وكابلات</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="headphones">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="سماعات">
+                    </div>
+                    <div class="category-info">
+                        <h3>سماعات</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="powerbanks">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1609592810793-abeb6c64b5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="شواحن محمولة">
+                    </div>
+                    <div class="category-info">
+                        <h3>شواحن محمولة</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="holders">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="حوامل هواتف">
+                    </div>
+                    <div class="category-info">
+                        <h3>حوامل هواتف</h3>
+                    </div>
+                </div>
+                
+                <div class="category-card" data-category="screen-protectors">
+                    <div class="category-img">
+                        <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="حاميات الشاشة">
+                    </div>
+                    <div class="category-info">
+                        <h3>حاميات الشاشة</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الإكسسوارات -->
+    <section id="products" class="accessories">
+        <div class="container">
+            <h2 class="section-title">الإكسسوارات المتوفرة</h2>
+            
+            <!-- فلترة المنتجات -->
+            <div class="filters">
+                <div class="filter-group">
+                    <h3>نوع الإكسسوار</h3>
+                    <div class="filter-options">
+                        <div class="filter-option active">الكل</div>
+                        <div class="filter-option" data-category="cases">كفرات هواتف</div>
+                        <div class="filter-option" data-category="chargers">شواحن وكابلات</div>
+                        <div class="filter-option" data-category="headphones">سماعات</div>
+                        <div class="filter-option" data-category="powerbanks">شواحن محمولة</div>
+                        <div class="filter-option" data-category="holders">حوامل هواتف</div>
+                        <div class="filter-option" data-category="screen-protectors">حاميات شاشة</div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>السعر</h3>
+                    <div class="filter-options">
+                        <div class="filter-option active">الكل</div>
+                        <div class="filter-option">أقل من 50 دينار</div>
+                        <div class="filter-option">50 - 100 دينار</div>
+                        <div class="filter-option">100 - 200 دينار</div>
+                        <div class="filter-option">أكثر من 200 دينار</div>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <h3>العلامة التجارية</h3>
+                    <div class="filter-options">
+                        <div class="filter-option active">الكل</div>
+                        <div class="filter-option">Spigen</div>
+                        <div class="filter-option">Anker</div>
+                        <div class="filter-option">Samsung</div>
+                        <div class="filter-option">Apple</div>
+                        <div class="filter-option">Baseus</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- شبكة المنتجات -->
+            <div class="products-grid">
+                <!-- منتج 1 -->
+                <div class="product-card" data-category="cases">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="كفر هاتف">
+                        <div class="product-badge">الأكثر مبيعاً</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>كفر Spigen لآيفون 14</h3>
+                        <p>كفر مقاوم للصدمات مع حماية زوايا مزدوجة</p>
+                        <div class="product-price">89 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 2 -->
+                <div class="product-card" data-category="chargers">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1609592810793-abeb6c64b5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="شاحن لاسلكي">
+                        <div class="product-badge">عرض خاص</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>شاحن لاسلكي Anker</h3>
+                        <p>شاحن لاسلكي سريع 15 واط مع تبريد نشط</p>
+                        <div class="product-price">129 دينار <span class="old-price">159 دينار</span></div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 3 -->
+                <div class="product-card" data-category="headphones">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="سماعات لاسلكية">
+                    </div>
+                    <div class="product-info">
+                        <h3>سماعات Samsung Buds2</h3>
+                        <p>سماعات لاسلكية مع عزل للضوضاء النشط</p>
+                        <div class="product-price">349 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 4 -->
+                <div class="product-card" data-category="powerbanks">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1609592810793-abeb6c64b5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="شاحن محمول">
+                    </div>
+                    <div class="product-info">
+                        <h3>شاحن محمول Anker 10000mAh</h3>
+                        <p>شاحن محمول سريع مع منفذ USB-C</p>
+                        <div class="product-price">149 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 5 -->
+                <div class="product-card" data-category="holders">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1586953208448-b95a79798f07?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="حامل هاتف للسيارة">
+                        <div class="product-badge">جديد</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>حامل هاتف مغناطيسي للسيارة</h3>
+                        <p>حامل مغناطيسي قوي مع شاحن لاسلكي</p>
+                        <div class="product-price">79 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 6 -->
+                <div class="product-card" data-category="screen-protectors">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="حامي شاشة">
+                    </div>
+                    <div class="product-info">
+                        <h3>حامي شاشة زجاجي مقوى</h3>
+                        <p>حامي شاشة زجاجي مقوى 9H لآيفون وسامسونج</p>
+                        <div class="product-price">45 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 7 -->
+                <div class="product-card" data-category="chargers">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1609592810793-abeb6c64b5c6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1138&q=80" alt="كابل شحن">
+                    </div>
+                    <div class="product-info">
+                        <h3>كابل شحن سريع USB-C</h3>
+                        <p>كابل شحن سريع 100 واط بطول 2 متر</p>
+                        <div class="product-price">59 دينار <span class="old-price">79 دينار</span></div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 8 -->
+                <div class="product-card" data-category="headphones">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="سماعات رأس">
+                    </div>
+                    <div class="product-info">
+                        <h3>سماعات رأس Sony WH-1000XM4</h3>
+                        <p>سماعات رأس لاسلكية مع عزل ضوضاء متقدم</p>
+                        <div class="product-price">1,199 دينار</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم العروض -->
+    <section class="offers">
+        <div class="container">
+            <h2 class="section-title">عروض خاصة على الإكسسوارات</h2>
+            <div class="offers-grid">
+                <!-- عرض 1 -->
+                <div class="offer-card">
+                    <div class="offer-badge">خصم 25%</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="عرض خاص">
+                    </div>
+                    <div class="offer-info">
+                        <h3>خصم على جميع الإكسسوارات</h3>
+                        <p>احصل على خصم 25% على جميع الإكسسوارات لمدة محدودة. شاملة الكفرات، الشواحن، السماعات وغيرها.</p>
+                        <a href="#" class="btn">استفد من العرض</a>
+                    </div>
+                </div>
+                
+                <!-- عرض 2 -->
+                <div class="offer-card">
+                    <div class="offer-badge">عرض حصري</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1556656793-08538906a9f8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="عرض خاص">
+                    </div>
+                    <div class="offer-info">
+                        <h3>شراء كفر واحصل على حامي شاشة مجاني</h3>
+                        <p>عند شراء أي كفر هاتف، احصل على حامي شاشة مجاني من نفس الماركة.</p>
+                        <a href="#" class="btn">استفد من العرض</a>
+                    </div>
+                </div>
+                
+                <!-- عرض 3 -->
+                <div class="offer-card">
+                    <div class="offer-badge">تخفيضات</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="عرض خاص">
+                    </div>
+                    <div class="offer-info">
+                        <h3>خصم على السماعات اللاسلكية</h3>
+                        <p>خصم 30% على جميع السماعات اللاسلكية من الماركات العالمية. العرض لفترة محدودة.</p>
+                        <a href="#" class="btn">استفد من العرض</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن المتجر</h3>
+                    <p>متجر تكنو يوفر أحدث الأجهزة الإلكترونية من هواتف، لابتوبات، أجهزة كمبيوتر وإكسسوارات بجودة عالية وأسعار منافسة.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="accessories.html">الإكسسوارات</a></li>
+                        <li><a href="#">العروض</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li><a href="phones.html">الهواتف</a></li>
+                        <li><a href="laptops.html">اللابتوبات</a></li>
+                        <li><a href="#">أجهزة الكمبيوتر</a></li>
+                        <li><a href="accessories.html">الإكسسوارات</a></li>
+                        <li><a href="#">الكفرات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات الاتصال</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> الرياض، المملكة العربية السعودية</li>
+                        <li><i class="fas fa-phone"></i> +966 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@technostore.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 عمار موبايل</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية بسيطة
+        document.addEventListener('DOMContentLoaded', function() {
+            // إضافة تأثير عند التمرير
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                } else {
+                    header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+                }
+            });
+            
+            // إضافة تأثير عند الضغط على أزرار إضافة إلى السلة
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.parentElement.querySelector('h3').textContent;
+                    alert(`تم إضافة ${productName} إلى سلة التسوق`);
+                });
+            });
+            
+            // فلترة المنتجات
+            const filterOptions = document.querySelectorAll('.filter-option');
+            filterOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    // إزالة النشاط من جميع الخيارات في المجموعة
+                    const parentGroup = this.parentElement;
+                    const groupOptions = parentGroup.querySelectorAll('.filter-option');
+                    groupOptions.forEach(opt => opt.classList.remove('active'));
+                    
+                    // إضافة النشاط للخيار المحدد
+                    this.classList.add('active');
+                    
+                    // تطبيق الفلترة
+                    filterProducts();
+                });
+            });
+            
+            // فلترة المنتجات حسب التصنيف
+            function filterProducts() {
+                const activeCategory = document.querySelector('.filter-options[data-category] .filter-option.active')?.dataset.category;
+                const products = document.querySelectorAll('.product-card');
+                
+                products.forEach(product => {
+                    if (!activeCategory || activeCategory === 'الكل' || product.dataset.category === activeCategory) {
+                        product.style.display = 'block';
+                    } else {
+                        product.style.display = 'none';
+                    }
+                });
+            }
+            
+            // فلترة المنتجات عند النقر على بطاقات التصنيف
+            const categoryCards = document.querySelectorAll('.category-card');
+            categoryCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const category = this.dataset.category;
+                    
+                    // تحديث الفلاتر النشطة
+                    const categoryOptions = document.querySelectorAll('.filter-option[data-category]');
+                    categoryOptions.forEach(option => {
+                        option.classList.remove('active');
+                        if (option.dataset.category === category) {
+                            option.classList.add('active');
+                        }
+                    });
+                    
+                    // تطبيق الفلترة
+                    filterProducts();
+                    
+                    // التمرير إلى قسم المنتجات
+                    document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

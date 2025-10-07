@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العروض - متجر تكنو</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+            --warning: #f39c12;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الهيدر */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .user-actions a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav {
+            background-color: var(--secondary);
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* زر القائمة للموبايل */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* قسم الهيرو للعروض */
+        .hero-offers {
+            background: linear-gradient(135deg, var(--accent) 0%, #c0392b 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-offers::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,128L48,144C96,160,192,192,288,186.7C384,181,480,139,576,138.7C672,139,768,181,864,197.3C960,213,1056,203,1152,181.3C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-offers h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .hero-offers p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .countdown-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 8px;
+            min-width: 80px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--accent);
+            padding: 12px 25px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--secondary);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--accent);
+        }
+        
+        /* الأقسام */
+        section {
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 10px auto;
+        }
+        
+        /* العروض المميزة */
+        .featured-offers {
+            background-color: var(--light);
+        }
+        
+        .offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .offer-card {
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .offer-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .offer-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        
+        .offer-badge.hot {
+            background-color: var(--warning);
+        }
+        
+        .offer-badge.new {
+            background-color: var(--success);
+        }
+        
+        .offer-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .offer-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .offer-card:hover .offer-img img {
+            transform: scale(1.1);
+        }
+        
+        .offer-overlay {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.7) 100%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .offer-card:hover .offer-overlay {
+            opacity: 1;
+        }
+        
+        .offer-info {
+            padding: 20px;
+        }
+        
+        .offer-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-size: 1.3rem;
+        }
+        
+        .offer-info p {
+            color: var(--gray);
+            margin-bottom: 15px;
+            min-height: 60px;
+        }
+        
+        .offer-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .offer-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.4rem;
+        }
+        
+        .offer-old-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 1rem;
+            margin-left: 10px;
+        }
+        
+        .offer-rating {
+            color: #f1c40f;
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--accent);
+            border-radius: 4px;
+        }
+        
+        .offer-stock {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 15px;
+        }
+        
+        /* قسم العروض الخاصة */
+        .special-offers {
+            background-color: white;
+        }
+        
+        .special-offers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .special-offer {
+            background: linear-gradient(135deg, var(--primary) 0%, #2980b9 100%);
+            border-radius: 12px;
+            overflow: hidden;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .special-offer:nth-child(2) {
+            background: linear-gradient(135deg, var(--success) 0%, #27ae60 100%);
+        }
+        
+        .special-offer:nth-child(3) {
+            background: linear-gradient(135deg, var(--warning) 0%, #e67e22 100%);
+        }
+        
+        .special-offer-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .special-offer-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .special-offer-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .special-offer-features {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+        
+        .special-offer-features li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .special-offer-features li i {
+            margin-left: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .special-offer-price {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .special-offer-price .price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .special-offer-price .old-price {
+            font-size: 1.2rem;
+            text-decoration: line-through;
+            opacity: 0.8;
+        }
+        
+        /* قسم المنتجات المخفضة */
+        .discounted-products {
+            background-color: var(--light);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .product-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            height: 48px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-old-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .product-rating {
+            color: #f1c40f;
+            margin-bottom: 10px;
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+        
+        /* قسم النشرة البريدية */
+        .newsletter {
+            background: linear-gradient(135deg, var(--secondary) 0%, #34495e 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .newsletter h2 {
+            margin-bottom: 20px;
+        }
+        
+        .newsletter p {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .newsletter-form button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        
+        .newsletter-form button:hover {
+            background-color: #c0392b;
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* التجاوبية */
+        @media (max-width: 992px) {
+            .special-offers-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .countdown {
+                flex-wrap: wrap;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                order: 3;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .hero-offers h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-offers p {
+                font-size: 1rem;
+            }
+            
+            .countdown-item {
+                min-width: 70px;
+                padding: 10px;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                left: 15px;
+                top: 20px;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .newsletter-form input,
+            .newsletter-form button {
+                border-radius: 4px;
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            
+            .product-img {
+                height: 150px;
+            }
+            
+            .product-info h3 {
+                font-size: 1rem;
+                height: auto;
+            }
+            
+            .offers-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXpjYx0uM617EfReX5Ee7ndDETaUnJunbCqA&s" alt="شعار متجر تكنو">
+                    <h1>عمار موبايل</h1>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="ابحث عن العروض...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="user-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> حسابي</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> السلة</a>
+                    <a href="favorites.html"><i class="fas fa-heart"></i> المفضلة</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav id="mainNav">
+            <div class="container">
+                <ul>
+                    <li><a href="/index.html">الرئيسية</a></li>
+                    <li><a href="phones.html">الهواتف</a></li>
+                    <li><a href="laptops.html">اللابتوبات</a></li>
+                    <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                    <li><a href="accessories.html">الإكسسوارات</a></li>
+                    <li><a href="covers.html">الكفرات</a></li>
+                    <li><a href="offers.html" class="active">العروض</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- قسم الهيرو للعروض -->
+    <section class="hero-offers">
+        <div class="container">
+            <div class="hero-content">
+                <h1>عروض خاصة محدودة الوقت!</h1>
+                <p>استفد من أفضل العروض والتخفيضات على أحدث الأجهزة الإلكترونية. عروض حصرية تنتهي قريباً!</p>
+                
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="days">05</span>
+                        <span class="countdown-label">أيام</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="hours">12</span>
+                        <span class="countdown-label">ساعات</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="minutes">45</span>
+                        <span class="countdown-label">دقائق</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="countdown-number" id="seconds">30</span>
+                        <span class="countdown-label">ثواني</span>
+                    </div>
+                </div>
+                
+                <a href="#featured-offers" class="btn btn-outline">استعرض العروض</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- العروض المميزة -->
+    <section id="featured-offers" class="featured-offers">
+        <div class="container">
+            <h2 class="section-title">العروض المميزة</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 40px; color: var(--gray);">أفضل العروض الحالية التي لا يمكن تفويتها</p>
+            
+            <div class="offers-grid">
+                <!-- عرض 1 -->
+                <div class="offer-card">
+                    <div class="offer-badge">خصم 40%</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=880&q=80" alt="عرض الهواتف">
+                        <div class="offer-overlay">
+                            <p>خصم كبير على مجموعة مختارة من الهواتف الذكية</p>
+                        </div>
+                    </div>
+                    <div class="offer-info">
+                        <h3>عرض الهواتف الذكية</h3>
+                        <p>احصل على خصم يصل إلى 40% على مجموعة مختارة من الهواتف الذكية من أشهر العلامات التجارية.</p>
+                        
+                        <div class="offer-meta">
+                            <div class="offer-price">
+                                1,299 دينار <span class="offer-old-price">2,199 دينار</span>
+                            </div>
+                            <div class="offer-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%;"></div>
+                        </div>
+                        <div class="offer-stock">باقي 32 منتج فقط</div>
+                        
+                        <button class="btn" style="width: 100%;">اشتري الآن</button>
+                    </div>
+                </div>
+                
+                <!-- عرض 2 -->
+                <div class="offer-card">
+                    <div class="offer-badge hot">الأكثر طلباً</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80" alt="عرض اللابتوبات">
+                        <div class="offer-overlay">
+                            <p>عروض خاصة على اللابتوبات للمستخدمين المحترفين</p>
+                        </div>
+                    </div>
+                    <div class="offer-info">
+                        <h3>عرض اللابتوبات المحترفة</h3>
+                        <p>خصم 35% على لابتوبات العمل والمونتاج مع مواصفات عالية وأداء استثنائي.</p>
+                        
+                        <div class="offer-meta">
+                            <div class="offer-price">
+                                3,499 دينار <span class="offer-old-price">5,399 دينار</span>
+                            </div>
+                            <div class="offer-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 60%;"></div>
+                        </div>
+                        <div class="offer-stock">باقي 18 منتج فقط</div>
+                        
+                        <button class="btn" style="width: 100%;">اشتري الآن</button>
+                    </div>
+                </div>
+                
+                <!-- عرض 3 -->
+                <div class="offer-card">
+                    <div class="offer-badge new">عرض جديد</div>
+                    <div class="offer-img">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="عرض الإكسسوارات">
+                        <div class="offer-overlay">
+                            <p>خصم على جميع الإكسسوارات لمدة محدودة</p>
+                        </div>
+                    </div>
+                    <div class="offer-info">
+                        <h3>خصم على الإكسسوارات</h3>
+                        <p>خصم 50% على جميع الإكسسوارات بما فيها السماعات، الشواحن، الكفرات وغيرها.</p>
+                        
+                        <div class="offer-meta">
+                            <div class="offer-price">
+                                49 دينار <span class="offer-old-price">99 دينار</span>
+                            </div>
+                            <div class="offer-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 90%;"></div>
+                        </div>
+                        <div class="offer-stock">باقي 5 منتج فقط</div>
+                        
+                        <button class="btn" style="width: 100%;">اشتري الآن</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- العروض الخاصة -->
+    <section class="special-offers">
+        <div class="container">
+            <h2 class="section-title">عروض حصرية</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 40px; color: var(--gray);">عروض محدودة الحصرية لمشتركينا</p>
+            
+            <div class="special-offers-grid">
+                <!-- عرض خاص 1 -->
+                <div class="special-offer">
+                    <div class="special-offer-header">
+                        <h3>باقة الألعاب المتكاملة</h3>
+                        <p>كل ما تحتاجه للعب بمستوى محترف</p>
+                    </div>
+                    <div class="special-offer-body">
+                        <ul class="special-offer-features">
+                            <li><i class="fas fa-check"></i> لابتوب ألعاب بمواصفات عالية</li>
+                            <li><i class="fas fa-check"></i> سماعات ألعاب احترافية</li>
+                            <li><i class="fas fa-check"></i> ماوس ولوحة مفاتيح ألعاب</li>
+                            <li><i class="fas fa-check"></i> كرسي ألعاب مريح</li>
+                            <li><i class="fas fa-check"></i> شاشة ألعاب 24 بوصة</li>
+                        </ul>
+                        
+                        <div class="special-offer-price">
+                            <span class="old-price">7,499 دينار</span>
+                            <span class="price">5,999 دينار</span>
+                        </div>
+                        
+                        <button class="btn" style="background: white; color: var(--primary); width: 100%;">احصل على الباقة</button>
+                    </div>
+                </div>
+                
+                <!-- عرض خاص 2 -->
+                <div class="special-offer">
+                    <div class="special-offer-header">
+                        <h3>باقة العمل من المنزل</h3>
+                        <p>مجهز بالكامل للعمل بكفاءة من المنزل</p>
+                    </div>
+                    <div class="special-offer-body">
+                        <ul class="special-offer-features">
+                            <li><i class="fas fa-check"></i> لابتوب محمول وأداء عالي</li>
+                            <li><i class="fas fa-check"></i> شاشة احترافية 27 بوصة</li>
+                            <li><i class="fas fa-check"></i> كاميرا ويب عالية الدقة</li>
+                            <li><i class="fas fa-check"></i> سماعات مع عزل ضوضاء</li>
+                            <li><i class="fas fa-check"></i> طابعة لاسلكية متعددة الوظائف</li>
+                        </ul>
+                        
+                        <div class="special-offer-price">
+                            <span class="old-price">5,899 دينار</span>
+                            <span class="price">4,299 دينار</span>
+                        </div>
+                        
+                        <button class="btn" style="background: white; color: var(--success); width: 100%;">احصل على الباقة</button>
+                    </div>
+                </div>
+                
+                <!-- عرض خاص 3 -->
+                <div class="special-offer">
+                    <div class="special-offer-header">
+                        <h3>باقة الطلبة</h3>
+                        <p>كل ما يحتاجه الطالب للدراسة عن بعد</p>
+                    </div>
+                    <div class="special-offer-body">
+                        <ul class="special-offer-features">
+                            <li><i class="fas fa-check"></i> لابتوب للدراسة بميزانية مناسبة</li>
+                            <li><i class="fas fa-check"></i> تابلت للقراءة والملاحظات</li>
+                            <li><i class="fas fa-check"></i> سماعات للمحاضرات</li>
+                            <li><i class="fas fa-check"></i> حقيبة حمل مريحة</li>
+                            <li><i class="fas fa-check"></i> جميع الكابلات والإكسسوارات</li>
+                        </ul>
+                        
+                        <div class="special-offer-price">
+                            <span class="old-price">3,999 دينار</span>
+                            <span class="price">2,799 دينار</span>
+                        </div>
+                        
+                        <button class="btn" style="background: white; color: var(--warning); width: 100%;">احصل على الباقة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- المنتجات المخفضة -->
+    <section class="discounted-products">
+        <div class="container">
+            <h2 class="section-title">منتجات مخفضة</h2>
+            <p class="section-subtitle" style="text-align: center; margin-bottom: 40px; color: var(--gray);">استفد من التخفيضات على منتجاتنا الأكثر مبيعاً</p>
+            
+            <div class="products-grid">
+                <!-- منتج 1 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=772&q=80" alt="هاتف ذكي">
+                        <div class="discount-badge">خصم 25%</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>هاتف شاومي ريدمي نوت 12</h3>
+                        <div class="product-price">
+                            <span class="product-old-price">1,199 دينار</span>
+                            899 دينار
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 2 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1587614382346-4ec70e388b28?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="لابتوب">
+                        <div class="discount-badge">خصم 30%</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>لابتوب لينوفو ثينك باد X1</h3>
+                        <div class="product-price">
+                            <span class="product-old-price">6,199 دينار</span>
+                            4,299 دينار
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 3 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" alt="سماعات">
+                        <div class="discount-badge">خصم 40%</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>سماعات لاسلكية Sony WH-1000XM4</h3>
+                        <div class="product-price">
+                            <span class="product-old-price">1,499 دينار</span>
+                            899 دينار
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+                
+                <!-- منتج 4 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1605236453806-6ff36851218e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="إكسسوارات">
+                        <div class="discount-badge">خصم 50%</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>حامي شاشة زجاجي مقوى</h3>
+                        <div class="product-price">
+                            <span class="product-old-price">99 دينار</span>
+                            49 دينار
+                        </div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <button class="add-to-cart">أضف إلى السلة</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#" class="btn" style="background-color: var(--accent);">عرض المزيد من المنتجات</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- النشرة البريدية -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>اشترك في نشرتنا البريدية</h2>
+            <p>كن أول من يعرف عن العروض الحصرية والتخفيضات الخاصة. اشترك الآن واحصل على خصم 10% على أول طلبية!</p>
+            
+            <form class="newsletter-form">
+                <input type="email" placeholder="أدخل بريدك الإلكتروني" required>
+                <button type="submit">اشترك الآن</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن المتجر</h3>
+                    <p>متجر تكنو يوفر أحدث الأجهزة الإلكترونية من هواتف، لابتوبات، أجهزة كمبيوتر وإكسسوارات بجودة عالية وأسعار منافسة.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="offers.html">العروض</a></li>
+                        <li><a href="#">الشروط والأحكام</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li><a href="phones.html">الهواتف</a></li>
+                        <li><a href="laptops.html">اللابتوبات</a></li>
+                        <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                        <li><a href="accessories.html">الإكسسوارات</a></li>
+                        <li><a href="covers.html">الكفرات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات الاتصال</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> الرياض، المملكة العربية السعودية</li>
+                        <li><i class="fas fa-phone"></i> +966 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@technostore.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 متجر تكنو</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            // زر القائمة للموبايل
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // العد التنازلي
+            function updateCountdown() {
+                const now = new Date();
+                const targetDate = new Date(now);
+                targetDate.setDate(now.getDate() + 5); // 5 أيام من الآن
+                
+                const diff = targetDate - now;
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            }
+            
+            // تحديث العد التنازلي كل ثانية
+            setInterval(updateCountdown, 1000);
+            updateCountdown(); // التشغيل الأولي
+            
+            // إضافة تأثير عند الضغط على أزرار إضافة إلى السلة
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('h3').textContent;
+                    alert(`تم إضافة ${productName} إلى سلة التسوق`);
+                });
+            });
+            
+            // إضافة تأثير عند الضغط على أزرار الشراء
+            const buyButtons = document.querySelectorAll('.btn');
+            buyButtons.forEach(button => {
+                if (button.textContent.includes('اشتري الآن') || button.textContent.includes('احصل على الباقة')) {
+                    button.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        alert('سيتم توجيهك إلى صفحة الدفع');
+                    });
+                }
+            });
+            
+            // نموذج النشرة البريدية
+            const newsletterForm = document.querySelector('.newsletter-form');
+            newsletterForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = this.querySelector('input[type="email"]').value;
+                alert(`شكراً لك على اشتراكك! تم إرسال كود الخصم إلى ${email}`);
+                this.reset();
+            });
+        });
+    </script>
+</body>
+</html>

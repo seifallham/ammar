@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الكفرات - متجر تكنو</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* الأساسيات */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #3498db;
+            --secondary: #2c3e50;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --gray: #95a5a6;
+            --success: #2ecc71;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الهيدر */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+        }
+        
+        .logo h1 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+        }
+        
+        .search-bar {
+            display: flex;
+            width: 40%;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--gray);
+            border-radius: 4px 0 0 4px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 15px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+        }
+        
+        .user-actions {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .user-actions a {
+            color: var(--dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        nav {
+            background-color: var(--secondary);
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-around;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+        }
+        
+        /* زر القائمة للموبايل */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--dark);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* قسم الفلترة والبحث */
+        .page-header {
+            background-color: var(--light);
+            padding: 30px 0;
+            margin-bottom: 30px;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .category-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .category-tab {
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-tab.active,
+        .category-tab:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .filter-section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+        
+        .filter-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+        
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        .color-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        
+        .color-option {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .color-option.active {
+            border-color: var(--dark);
+            transform: scale(1.1);
+        }
+        
+        .price-range {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .price-input {
+            width: 100px;
+            padding: 8px;
+            border: 1px solid var(--gray);
+            border-radius: 4px;
+        }
+        
+        .filter-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* المنتجات */
+        .products-section {
+            padding: 20px 0 60px;
+        }
+        
+        .products-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .sort-options {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .products-count {
+            color: var(--gray);
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 1;
+        }
+        
+        .product-img {
+            height: 200px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f8f8;
+            position: relative;
+        }
+        
+        .product-img img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: transform 0.5s;
+        }
+        
+        .product-card:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .color-preview {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+        }
+        
+        .color-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            border: 1px solid #ddd;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-info h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+            height: 48px;
+            overflow: hidden;
+        }
+        
+        .product-compatibility {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .product-old-price {
+            color: var(--gray);
+            text-decoration: line-through;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+        
+        .product-rating {
+            color: #f1c40f;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .rating-count {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-right: 5px;
+        }
+        
+        .product-features {
+            list-style: none;
+            margin-bottom: 15px;
+        }
+        
+        .product-features li {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .product-features li i {
+            margin-left: 5px;
+            color: var(--success);
+            font-size: 0.8rem;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .add-to-cart {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            flex: 1;
+            transition: background 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background-color: #2980b9;
+        }
+        
+        .favorite-btn {
+            background-color: transparent;
+            border: 1px solid var(--gray);
+            color: var(--gray);
+            padding: 8px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .favorite-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+        }
+        
+        /* قسم الأنواع */
+        .types-section {
+            background-color: var(--light);
+            padding: 60px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary);
+            margin: 10px auto;
+        }
+        
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .type-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+        
+        .type-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .type-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .type-card h3 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .type-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        /* الترقيم */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 5px;
+        }
+        
+        .pagination a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: white;
+            color: var(--dark);
+            text-decoration: none;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            transition: all 0.3s;
+        }
+        
+        .pagination a.active,
+        .pagination a:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 35px;
+            height: 35px;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* التجاوبية */
+        @media (max-width: 992px) {
+            .filter-row {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+            
+            .types-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-top {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .search-bar {
+                width: 100%;
+                order: 3;
+            }
+            
+            .user-actions {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+            
+            .products-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 20px;
+            }
+            
+            .menu-toggle {
+                display: block;
+                position: absolute;
+                left: 15px;
+                top: 20px;
+            }
+            
+            nav {
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0;
+            }
+            
+            nav a {
+                display: block;
+                padding: 12px 15px;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+            
+            .category-tabs {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
+            }
+            
+            .product-img {
+                height: 150px;
+            }
+            
+            .product-info h3 {
+                font-size: 1rem;
+                height: auto;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .filter-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .types-grid {
+                grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الهيدر -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                
+                <div class="logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXpjYx0uM617EfReX5Ee7ndDETaUnJunbCqA&s" alt="شعار متجر تكنو">
+                    <h1>عمار موبايل</h1>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="ابحث عن الكفر الذي تريده...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="user-actions">
+                    <a href="login.html"><i class="fas fa-user"></i> حسابي</a>
+                    <a href="cart.html"><i class="fas fa-shopping-cart"></i> السلة</a>
+                    <a href="favorites.html"><i class="fas fa-heart"></i> المفضلة</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav id="mainNav">
+            <div class="container">
+                <ul>
+                    <li><a href="/index.html">الرئيسية</a></li>
+                    <li><a href="phones.html">الهواتف</a></li>
+                    <li><a href="laptops.html">اللابتوبات</a></li>
+                    <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                    <li><a href="accessories.html">الإكسسوارات</a></li>
+                    <li><a href="covers.html" class="active">الكفرات</a></li>
+                    <li><a href="offers.html">العروض</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- قسم الكفرات -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="page-title">كفرات الهواتف واللابتوبات</h1>
+            <p class="page-subtitle">اكتشف مجموعتنا الواسعة من الكفرات الواقية والمزخرفة لهواتفكم وأجهزتكم المحمولة بألوان وتصاميم متنوعة</p>
+            
+            <div class="category-tabs">
+                <div class="category-tab active">جميع الكفرات</div>
+                <div class="category-tab">كفرات الهواتف</div>
+                <div class="category-tab">كفرات اللابتوبات</div>
+                <div class="category-tab">كفرات الأيباد</div>
+                <div class="category-tab">كفرات واقية</div>
+                <div class="category-tab">كفرات جلدية</div>
+            </div>
+            
+            <div class="filter-section">
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="device-type">نوع الجهاز</label>
+                        <select id="device-type" class="filter-select">
+                            <option value="">جميع الأجهزة</option>
+                            <option value="phone">هاتف</option>
+                            <option value="laptop">لابتوب</option>
+                            <option value="tablet">تابلت</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="brand">العلامة التجارية</label>
+                        <select id="brand" class="filter-select">
+                            <option value="">جميع العلامات</option>
+                            <option value="apple">آيفون</option>
+                            <option value="samsung">سامسونج</option>
+                            <option value="xiaomi">شاومي</option>
+                            <option value="huawei">هواوي</option>
+                            <option value="dell">ديل</option>
+                            <option value="hp">إتش بي</option>
+                            <option value="lenovo">لينوفو</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="model">الموديل</label>
+                        <select id="model" class="filter-select">
+                            <option value="">جميع الموديلات</option>
+                            <option value="iphone14">آيفون 14</option>
+                            <option value="iphone13">آيفون 13</option>
+                            <option value="s23">جلاكسي S23</option>
+                            <option value="s22">جلاكسي S22</option>
+                            <option value="redmi12">ريدمي نوت 12</option>
+                            <option value="p60">P60 برو</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label for="price">نطاق السعر</label>
+                        <div class="price-range">
+                            <input type="number" id="minPrice" class="price-input" placeholder="الحد الأدنى">
+                            <span>إلى</span>
+                            <input type="number" id="maxPrice" class="price-input" placeholder="الحد الأقصى">
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>اللون</label>
+                        <div class="color-options">
+                            <div class="color-option active" style="background-color: #000000;" title="أسود"></div>
+                            <div class="color-option" style="background-color: #ffffff; border: 1px solid #ddd;" title="أبيض"></div>
+                            <div class="color-option" style="background-color: #ff0000;" title="أحمر"></div>
+                            <div class="color-option" style="background-color: #0000ff;" title="أزرق"></div>
+                            <div class="color-option" style="background-color: #008000;" title="أخضر"></div>
+                            <div class="color-option" style="background-color: #ffff00;" title="أصفر"></div>
+                            <div class="color-option" style="background-color: #800080;" title="بنفسجي"></div>
+                            <div class="color-option" style="background-color: #ffa500;" title="برتقالي"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="material">المادة</label>
+                        <select id="material" class="filter-select">
+                            <option value="">جميع المواد</option>
+                            <option value="silicone">سيليكون</option>
+                            <option value="plastic">بلاستيك</option>
+                            <option value="leather">جلد</option>
+                            <option value="metal">معدن</option>
+                            <option value="hybrid">هجين</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="filter-actions">
+                    <button class="btn btn-outline">إعادة تعيين</button>
+                    <button class="btn">تطبيق الفلترة</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم المنتجات -->
+    <section class="products-section">
+        <div class="container">
+            <div class="products-header">
+                <h2>الكفرات المتاحة <span class="products-count">(32 منتج)</span></h2>
+                
+                <div class="sort-options">
+                    <label for="sort">ترتيب حسب:</label>
+                    <select id="sort" class="filter-select">
+                        <option value="popular">الأكثر شيوعاً</option>
+                        <option value="newest">الأحدث</option>
+                        <option value="price-low">السعر: من الأقل للأعلى</option>
+                        <option value="price-high">السعر: من الأعلى للأقل</option>
+                        <option value="rating">التقييم</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="products-grid">
+                <!-- كفر 1 -->
+                <div class="product-card">
+                    <div class="product-badge">الأكثر مبيعاً</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1601593346740-925612772716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="كفر آيفون 14 واقي">
+                        <div class="color-preview">
+                            <div class="color-dot" style="background-color: #000000;"></div>
+                            <div class="color-dot" style="background-color: #ffffff;"></div>
+                            <div class="color-dot" style="background-color: #ff0000;"></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>كفر آيفون 14 واقي - شفاف</h3>
+                        <div class="product-compatibility">متوافق مع آيفون 14 و 14 بلس</div>
+                        <div class="product-price">
+                            <span class="product-old-price">89 دينار</span>
+                            59 دينار
+                        </div>
+                        <div class="product-rating">
+                            <span class="rating-count">(142)</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> حماية متكاملة من الصدمات</li>
+                            <li><i class="fas fa-check"></i> تصميم رفيع وأنيق</li>
+                            <li><i class="fas fa-check"></i> حواف مرتفعة لحماية الشاشة</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- كفر 2 -->
+                <div class="product-card">
+                    <div class="product-badge">عرض خاص</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="كفر سامسونج جلد">
+                        <div class="color-preview">
+                            <div class="color-dot" style="background-color: #000000;"></div>
+                            <div class="color-dot" style="background-color: #8B4513;"></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>كفر سامسونج جلاكسي S23 - جلد طبيعي</h3>
+                        <div class="product-compatibility">متوافق مع سامسونج جلاكسي S23</div>
+                        <div class="product-price">
+                            <span class="product-old-price">129 دينار</span>
+                            99 دينار
+                        </div>
+                        <div class="product-rating">
+                            <span class="rating-count">(87)</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> جلد طبيعي عالي الجودة</li>
+                            <li><i class="fas fa-check"></i> جيب نقدي مدمج</li>
+                            <li><i class="fas fa-check"></i> حماية فائقة من الخدوش</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- كفر 3 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1601593346740-925612772716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="كفر لابتوب ديل">
+                        <div class="color-preview">
+                            <div class="color-dot" style="background-color: #000000;"></div>
+                            <div class="color-dot" style="background-color: #808080;"></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>كفر لابتوب ديل - مقاوم للماء</h3>
+                        <div class="product-compatibility">متوافق مع ديل لابتوب 15 بوصة</div>
+                        <div class="product-price">149 دينار</div>
+                        <div class="product-rating">
+                            <span class="rating-count">(54)</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> مقاوم للماء والغبار</li>
+                            <li><i class="fas fa-check"></i> حشوة داخلية واقية</li>
+                            <li><i class="fas fa-check"></i> جيب للأكسسوارات</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- كفر 4 -->
+                <div class="product-card">
+                    <div class="product-badge">جديد</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="كفر آيباد برو">
+                        <div class="color-preview">
+                            <div class="color-dot" style="background-color: #000000;"></div>
+                            <div class="color-dot" style="background-color: #0000ff;"></div>
+                            <div class="color-dot" style="background-color: #ff0000;"></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>كفر آيباد برو - مع لوحة مفاتيح</h3>
+                        <div class="product-compatibility">متوافق مع آيباد برو 12.9 بوصة</div>
+                        <div class="product-price">299 دينار</div>
+                        <div class="product-rating">
+                            <span class="rating-count">(36)</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> لوحة مفاتيح لاسلكية مدمجة</li>
+                            <li><i class="fas fa-check"></i> دعامة متعددة الزوايا</li>
+                            <li><i class="fas fa-check"></i> حماية شاملة للجهاز</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- كفر 5 -->
+                <div class="product-card">
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1601593346740-925612772716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="كفر هواوي مخصص">
+                        <div class="color-preview">
+                            <div class="color-dot" style="background-color: #ff0000;"></div>
+                            <div class="color-dot" style="background-color: #0000ff;"></div>
+                            <div class="color-dot" style="background-color: #008000;"></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>كفر هواوي P60 برو - تصميم مخصص</h3>
+                        <div class="product-compatibility">متوافق مع هواوي P60 برو</div>
+                        <div class="product-price">79 دينار</div>
+                        <div class="product-rating">
+                            <span class="rating-count">(63)</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> تصميمات مخصصة متعددة</li>
+                            <li><i class="fas fa-check"></i> طباعة عالية الجودة</li>
+                            <li><i class="fas fa-check"></i> حماية متكاملة للجهاز</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- كفر 6 -->
+                <div class="product-card">
+                    <div class="product-badge">وفر 20%</div>
+                    <div class="product-img">
+                        <img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80" alt="كفر لابتوب أسوس">
+                        <div class="color-preview">
+                            <div class="color-dot" style="background-color: #000000;"></div>
+                            <div class="color-dot" style="background-color: #ff0000;"></div>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3>كفر لابتوب أسوس - للجيمنج</h3>
+                        <div class="product-compatibility">متوافق مع أسوس روغ 15 بوصة</div>
+                        <div class="product-price">
+                            <span class="product-old-price">199 دينار</span>
+                            159 دينار
+                        </div>
+                        <div class="product-rating">
+                            <span class="rating-count">(41)</span>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <ul class="product-features">
+                            <li><i class="fas fa-check"></i> تصميم رياضي أنيق</li>
+                            <li><i class="fas fa-check"></i> حماية متقدمة من الصدمات</li>
+                            <li><i class="fas fa-check"></i> جيب للأكسسوارات والأسلاك</li>
+                        </ul>
+                        <div class="product-actions">
+                            <button class="add-to-cart">أضف إلى السلة</button>
+                            <button class="favorite-btn"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- الترقيم -->
+            <div class="pagination">
+                <a href="#" class="active">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#"><i class="fas fa-chevron-left"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم أنواع الكفرات -->
+    <section class="types-section">
+        <div class="container">
+            <h2 class="section-title">أنواع الكفرات</h2>
+            <p class="page-subtitle">اختر من بين مجموعة متنوعة من الكفرات المصممة خصيصاً لحماية أجهزتك وتعزيز مظهرها</p>
+            
+            <div class="types-grid">
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>كفرات واقية</h3>
+                    <p>كفرات متينة توفر حماية شاملة من الصدمات والسقوط</p>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-feather"></i>
+                    </div>
+                    <h3>كفرات رفيعة</h3>
+                    <p>كفرات خفيفة الوزن تحافظ على أناقة الجهاز مع توفير حماية أساسية</p>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-palette"></i>
+                    </div>
+                    <h3>كفرات مخصصة</h3>
+                    <p>كفرات بتصاميم فريدة وشخصية تعبر عن ذوقك الخاص</p>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>كفرات مقاومة للماء</h3>
+                    <p>كفرات تحمي جهازك من الماء والسوائل الأخرى</p>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>كفرات متعددة الطبقات</h3>
+                    <p>كفرات بتقنية متعددة الطبقات لتوفير أقصى حماية</p>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>كفرات اللابتوب</h3>
+                    <p>كفرات وحقائب مصممة خصيصاً لحماية أجهزة اللابتوب</p>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <h3>كفرات التابلت</h3>
+                    <p>كفرات ذكية للتابلت مع دعامات وحاملات مدمجة</p>
+                </div>
+                
+                <div class="type-card">
+                    <div class="type-icon">
+                        <i class="fas fa-gem"></i>
+                    </div>
+                    <h3>كفرات فاخرة</h3>
+                    <p>كفرات فاخرة مصنوعة من مواد عالية الجودة مثل الجلد الطبيعي</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن المتجر</h3>
+                    <p>متجر تكنو يوفر أحدث الأجهزة الإلكترونية من هواتف، لابتوبات، أجهزة كمبيوتر وإكسسوارات بجودة عالية وأسعار منافسة.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="covers.html">الكفرات</a></li>
+                        <li><a href="offers.html">العروض</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>الفئات</h3>
+                    <ul>
+                        <li><a href="phones.html">الهواتف</a></li>
+                        <li><a href="laptops.html">اللابتوبات</a></li>
+                        <li><a href="computers.html">أجهزة الكمبيوتر</a></li>
+                        <li><a href="accessories.html">الإكسسوارات</a></li>
+                        <li><a href="covers.html">الكفرات</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>معلومات الاتصال</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> الرياض، المملكة العربية السعودية</li>
+                        <li><i class="fas fa-phone"></i> +966 123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@technostore.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 متجر تكنو</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // إضافة تأثيرات تفاعلية
+        document.addEventListener('DOMContentLoaded', function() {
+            // زر القائمة للموبايل
+            const menuToggle = document.getElementById('menuToggle');
+            const mainNav = document.getElementById('mainNav');
+            
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+            
+            // علامات التبويب
+            const categoryTabs = document.querySelectorAll('.category-tab');
+            categoryTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    categoryTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // خيارات الألوان
+            const colorOptions = document.querySelectorAll('.color-option');
+            colorOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    colorOptions.forEach(o => o.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+            
+            // إضافة تأثير عند الضغط على أزرار إضافة إلى السلة
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const productName = this.closest('.product-card').querySelector('h3').textContent;
+                    alert(`تم إضافة ${productName} إلى سلة التسوق`);
+                });
+            });
+            
+            // إضافة تأثير عند الضغط على أزرار المفضلة
+            const favoriteButtons = document.querySelectorAll('.favorite-btn');
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        this.style.color = 'var(--accent)';
+                        this.style.borderColor = 'var(--accent)';
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        this.style.color = 'var(--gray)';
+                        this.style.borderColor = 'var(--gray)';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
